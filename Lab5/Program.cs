@@ -1262,7 +1262,7 @@ public class Program
     #region bonus part
     public double[,] Task_4(double[,] matrix, int index)
     {
-        MatrixConverter[] mc = new MatrixConverter[4] {ToLowerTriangular, ToUpperTriangular, ToLeftDiagonal, ToRightDiagonal };
+        MatrixConverter[] mc = new MatrixConverter[] {ToLowerTriangular, ToUpperTriangular, ToLeftDiagonal, ToRightDiagonal };
         
 
         mc[index](matrix);
@@ -1281,12 +1281,12 @@ public class Program
     public delegate void MatrixConverter(double[,] A);
     void ToLowerTriangular(double[,]matrix)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(0); j++)
         {
             for (int k = j + 1; k < matrix.GetLength(0); k++)
             {
                 double p = matrix[k, j] / matrix[j, j];
-                for (int m = j; m < matrix.GetLength(1); m++)
+                for (int m = j; m < matrix.GetLength(0); m++)
                 {
                     matrix[k, m] = matrix[k, m] - matrix[j, m] * p;
                 }
@@ -1301,7 +1301,7 @@ public class Program
             for (int k = j - 1; k >=0; k--)
             {
                 double p = matrix[k, j] / matrix[j, j];
-                for (int m = j; m >=0; m++)
+                for (int m = j; m >=0; m--)
                 {
                     matrix[k, m] = matrix[k, m] - matrix[j, m] * p;
                 }
