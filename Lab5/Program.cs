@@ -154,8 +154,13 @@ public class Program
     public void Task_2_3(ref int[,] B, ref int[,] C)
     {
         // code here
-
+        zadacha(ref B);
         //  create and use method FindDiagonalMaxIndex(matrix);
+        zadacha(ref C);
+        // end
+    }
+    void zadacha(ref int[,]B)
+    {
         int i1 = FindDiagonalMaxIndex(B);
         int[,] D = new int[B.GetLength(0) - 1, B.GetLength(1)];
         for (int i = 0; i < i1; i++)
@@ -167,30 +172,12 @@ public class Program
         }
         for (int i = i1 + 1; i < B.GetLength(0); i++)
         {
-            for (int j = 0; j <B.GetLength(1); j++)
+            for (int j = 0; j < B.GetLength(1); j++)
             {
-                D[i - 1, j] =B[i, j];
+                D[i - 1, j] = B[i, j];
             }
         }
         B = D;
-        int i2 = FindDiagonalMaxIndex(C);
-        int[,] A = new int[C.GetLength(0) - 1, C.GetLength(1)];
-        for (int i = 0; i < i2; i++)
-        {
-            for (int j = 0; j < C.GetLength(1); j++)
-            {
-                A[i, j] = C[i, j];
-            }
-        }
-        for (int i = i2 + 1; i < C.GetLength(0); i++)
-        {
-            for (int j = 0; j <C.GetLength(1); j++)
-            {
-                A[i - 1, j] =C[i, j];
-            }
-        }
-        C = A;
-        // end
     }
     int FindDiagonalMaxIndex(int [,]A)
     {
@@ -797,24 +784,24 @@ public class Program
     public void Task_2_27(int[,] A, int[,] B)
     {
         // code here
-        for (int i=0; i<A.GetLength(0); i++)
-        {
-            int j = FindRowMaxIndex(A, i, out int j0);
-            if (i % 2 == 0) ReplaceMaxElementOdd(A, i, j);
-            else ReplaceMaxElementEven(A, i,j);
-        }
-        for (int i = 0; i < B.GetLength(0); i++)
-        {
-            int j1 = FindRowMaxIndex(B, i, out int j01);
-            if (i % 2 == 0) ReplaceMaxElementOdd(B, i, j1);
-            else ReplaceMaxElementEven(B, i, j1);
-        }
+        zadanie(ref A);
+        zadanie(ref B);
         
         // create and use FindRowMaxIndex(matrix, rowIndex, out columnIndex);
         // create and use ReplaceMaxElementOdd(matrix, row, column);
         // create and use ReplaceMaxElementEven(matrix, row, column);
 
         // end
+    }
+    void zadanie(ref int[,]A)
+    {
+        for (int i = 0; i < A.GetLength(0); i++)
+        {
+            int j = FindRowMaxIndex(A, i, out int j0);
+            if (i % 2 == 0) ReplaceMaxElementOdd(A, i, j);
+            else ReplaceMaxElementEven(A, i, j);
+        }
+
     }
     int FindRowMaxIndex(int[,]A, int i, out int j)
     {
@@ -1262,7 +1249,7 @@ public class Program
     #region bonus part
     public double[,] Task_4(double[,] matrix, int index)
     {
-        MatrixConverter[] mc = new MatrixConverter[] {ToLowerTriangular, ToUpperTriangular, ToLeftDiagonal, ToRightDiagonal };
+        MatrixConverter[] mc = new MatrixConverter[4] {ToLowerTriangular, ToUpperTriangular, ToLeftDiagonal, ToRightDiagonal };
         
 
         mc[index](matrix);
@@ -1281,12 +1268,12 @@ public class Program
     public delegate void MatrixConverter(double[,] A);
     void ToLowerTriangular(double[,]matrix)
     {
-        for (int j = 0; j < matrix.GetLength(0); j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
             for (int k = j + 1; k < matrix.GetLength(0); k++)
             {
                 double p = matrix[k, j] / matrix[j, j];
-                for (int m = j; m < matrix.GetLength(0); m++)
+                for (int m = j; m < matrix.GetLength(1); m++)
                 {
                     matrix[k, m] = matrix[k, m] - matrix[j, m] * p;
                 }
@@ -1301,7 +1288,7 @@ public class Program
             for (int k = j - 1; k >=0; k--)
             {
                 double p = matrix[k, j] / matrix[j, j];
-                for (int m = j; m >=0; m--)
+                for (int m = j; m >=0; m++)
                 {
                     matrix[k, m] = matrix[k, m] - matrix[j, m] * p;
                 }
